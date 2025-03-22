@@ -1,0 +1,425 @@
+/* ================================= */
+/*          GENERAL STYLES           */
+/* ================================= */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #86a89c;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* ================================= */
+/*          NAVIGATION BAR           */
+/* ================================= */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #86a89c;
+    padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    padding-right: 60px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: #0A1F44;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 15px;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    background-color: #195962;
+    border-radius: 5px;
+}
+
+/* Login Button */
+.login-btn {
+    background-color: #247b88;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+    background-color: #195962;
+}
+
+/* ================================= */
+/*         GENERAL PAGE LAYOUT       */
+/* ================================= */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+main {
+    margin-top: 80px; /* Ensures content isn't covered by fixed navbar */
+}
+
+/* ================================= */
+/*             TEXT STYLES           */
+/* ================================= */
+
+h1 {
+    color: #001f3f;
+    font-size: 3rem;
+    text-align: center;
+    width: 100%;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    color: #001f3f;
+    margin-bottom: 20px;
+}
+
+/* ================================= */
+/*             IMAGES                */
+/* ================================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ================================= */
+/*     HOME PAGE VERTICAL LAYOUT     */
+/* ================================= */
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 10px auto 0 auto;
+    padding: 10px;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Ensures everything is stacked properly */
+.text-content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.home-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #0A1F44;
+    text-align: center; /* Centered alignment */
+    margin: 60px 0 20px 0;
+}
+
+.home-subtext {
+    font-size: 1.2rem;
+    color: #0A1F44;
+    margin-bottom: 20px;
+    max-width: 600px;
+}
+
+/* Image centered below the text */
+.home-image {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+/* Buttons centered below the image */
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Button styling */
+.home-button {
+    display: block;
+    background-color: #247b88;
+    color: #0A1F44;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 250px;
+    transition: 0.3s ease-in-out;
+}
+
+.home-button:hover {
+    background-color: #195962;
+}
+
+/* ================================= */
+/*       LESSONS PAGE BUTTONS        */
+/* ================================= */
+
+.lessons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.lesson-box {
+    background-color: #247b88;
+    color: #0A1F44;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 250px;
+    transition: 0.3s ease-in-out;
+}
+
+.lesson-box:hover {
+    background-color: #195962;
+}
+
+.lesson-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #001f3f;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.lesson-container {
+    max-width: 900px; /* Adjust width as needed */
+    margin: 0 auto;   /* Center content horizontally */
+    padding: 20px;    /* Add space around content */
+}
+
+
+/* ================================= */
+/*     ADVICE PAGE TEXT STYLES       */
+/* ================================= */
+
+/* Left-align and style the advice headings */
+.advice-heading {
+    text-align: left;
+    font-size: 2rem;
+    color: #0A1F44; /* Consistent heading color */
+    margin: 40px 0 10px 0;
+}
+
+/* Style for paragraph content under each section */
+.advice-text {
+    text-align: left;
+    font-size: 1.2rem;
+    color: #001f3f; /* Consistent body text color */
+    line-height: 1.6; /* Improves readability */
+    margin-bottom: 20px; /* Adds space between paragraphs */
+}
+
+/* Container to center and add padding to advice content */
+.advice-container {
+    max-width: 800px; /* Keeps content from stretching too wide */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 0 20px; /* Add padding on both sides for breathing room */
+}
+
+/* ================================= */
+/*        MAIN HEADING STYLES        */
+/* ================================= */
+
+/* Consistent main heading style across all pages */
+.page-title {
+    font-size: 3rem; /* Uniform heading size */
+    color: #0A1F44; /* Consistent heading color */
+    text-align: center; /* Centered alignment */
+    margin: 100px 0 20px 0; /* Space from navbar (100px) and below (20px) */
+}
+
+/* Interactive Section Styling */
+/* Ensure quiz text matches the other sections */
+.quiz-form {
+    color: #00153B;           /* Consistent text color */
+    font-size: 1.2rem;        /* Match the other sections' font size */
+}
+
+/* Style quiz questions */
+.quiz-question p {
+    color: inherit;           /* Inherit color from parent */
+    font-size: inherit;       /* Inherit size from parent */
+    margin-bottom: 12px;      /* Add spacing for better readability */
+    font-weight: bold;        /* Make questions bold */
+}
+
+/* Style quiz options (labels) */
+.quiz-question label {
+    display: block;           /* Ensure each option is on a new line */
+    color: inherit;           /* Ensure color matches */
+    font-size: inherit;       /* Ensure size matches */
+    margin-bottom: 8px;       /* Spacing between options */
+}
+
+/* Ensure radio buttons align with text */
+.quiz-question input[type="radio"] {
+    margin-right: 8px;        /* Space between radio button and text */
+    vertical-align: middle;   /* Align radio with text */
+}
+
+/* Center the Submit Quiz button */
+.quiz-submit-container {
+    display: flex;           /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    margin-top: 20px;        /* Add spacing above the button */
+}
+
+
+/* Virtual Machine Box */
+.vm-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* Submit Button */
+button {
+    background-color: #247b88;
+    color: #0A1F44;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+button:hover {
+    background-color: #195962;
+}
+
+/* Centered and Styled Numbered List */
+.numbered-list {
+    list-style-type: decimal;  /* Numbered list */
+    padding-left: 20px;        /* Align with other sections */
+    color: #00153B;            /* Match text color */
+    font-size: 1.2rem;
+}
+
+/* Numbered Items Styling */
+.numbered-item {
+    margin-bottom: 8px;        /* Space between list items */
+    color: #00153B;     /* Match surrounding text */
+    display: list-item;        /* Ensure items are inline with numbers */
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+/* Keep content centered */
+.lesson-container {
+    max-width: 900px;          /* Adjust as needed */
+    margin: 0 auto;            /* Center horizontally */
+    padding: 20px;             /* Add space around content */
+}
+
+/* ================================= */
+/*         LOGIN PAGE STYLES         */
+/* ================================= */
+
+/* Center the login form content */
+.login-section {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Input Field Styling */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border: 2px solid #0A1F44;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Adjust Login Button */
+.login-form .home-button {
+    width: 100%;
+}
+
+/* Style the sign-up link */
+.login-section a {
+    color: #0A1F44;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.login-section a:hover {
+    color: #195962;
+}
+
+/* Specific style for login page labels */
+.login-label {
+    font-size: 1.2rem; /* Match the intro text size */
+    color: #001f3f; /* Ensure consistency with other body text */
+    margin-bottom: 8px; /* Add some spacing below the label */
+    display: block; /* Ensure label is on a new line */
+}
+
+/* For links on the Parental Advice page only */
+.advice-text a {
+    color: #0A1F44;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.advice-text a:hover {
+    color: #247b88;
+}
+
+

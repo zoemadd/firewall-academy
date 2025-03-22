@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="{{ url_for('home') }}" class="logo-container">
+            <img src="{{ url_for('static', filename='images/firewall_academy_logo.png') }}" alt="Firewall Academy Logo" class="logo">
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('parental_advice') }}">Parental Advice</a></li>
+
+            <!-- Log In / Log Out Button -->
+            {% if logged_in %}
+                <li><a href="{{ url_for('logout') }}" class="login-btn">Log Out</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}" class="login-btn">Log In</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+    <!-- Page Title -->
+    <div class="container">
+        <h1 class="page-title">Lessons</h1>
+        <p class="lesson-intro">Select a lesson to begin:</p>
+
+        <!-- Dynamic Lesson Buttons -->
+        <div class="lessons-container">
+            {% for lesson in lessons %}
+                <a href="{{ url_for('lesson', lesson_id=lesson.id) }}" class="lesson-box">
+                    {{ lesson.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ lesson.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="{{ url_for('home') }}" class="logo-container">
+            <img src="{{ url_for('static', filename='images/firewall_academy_logo.png') }}" alt="Firewall Academy Logo" class="logo">
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('lessons') }}">Lessons</a></li>
+            <li><a href="{{ url_for('parental_advice') }}">Parental Advice</a></li>
+
+            <!-- Log In / Log Out Button -->
+            {% if logged_in %}
+                <li><a href="{{ url_for('logout') }}" class="login-btn">Log Out</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}" class="login-btn">Log In</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="lesson-container">
+
+        <!-- Lesson Title -->
+        <h1 class="page-title">{{ lesson.name }}</h1>
+
+        <!-- Lesson Introduction -->
+        <p class="intro-text">{{ lesson.introduction }}</p>
+
+        <!-- Why It Matters -->
+        <section class="why-it-matters">
+            <h2 class="advice-heading">Why It Matters:</h2>
+            <p class="advice-text">{{ lesson.why_it_matters }}</p>
+        </section>
+
+        <!-- Key Concepts -->
+        <section class="key-concepts">
+            <h2 class="advice-heading">Key Concepts:</h2>
+            <ol class="numbered-list">
+                {% for concept in lesson.key_concepts %}
+                    <li class="numbered-item">{{ concept }}</li>
+                {% endfor %}
+            </ol>
+        </section>
+
+        <!-- Your Activity -->
+        <section class="activity-block">
+            <h2 class="advice-heading">Your Activity:</h2>
+
+            <!-- Quiz Section -->
+            {% if lesson.interactive_type == 'quiz' %}
+                <form method="POST" class="quiz-form">
+                    {% for i, question in enumerate(lesson.interactive_content) %}
+                        <div class="quiz-question">
+                            <p>{{ question.question }}</p>
+                            {% for option in question.options %}
+                                <label>
+                                    <input type="radio" name="question-{{ i }}" value="{{ option }}"> {{ option }}
+                                </label><br>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div class="quiz-submit-container">
+                        <button type="submit">Submit Quiz</button>
+                    </div>
+
+                </form>
+
+                <!-- Display Score if Quiz Completed -->
+                {% if score is defined %}
+                    <p class="intro-text">You scored {{ score }} out of {{ total }}!</p>
+                {% endif %}
+
+            <!-- Simulation Section -->
+            {% elif lesson.interactive_type == 'simulation' %}
+                <div class="vm-container">
+                    {{ lesson.interactive_content|safe }}
+                </div>
+            {% endif %}
+        </section>
+
+    </main>
+
+</body>
+
+</html>

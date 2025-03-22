@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parental Advice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Consistent link styling */
+        a {
+            color: #195962; /* Match login page link color */
+            text-decoration: underline; /* Underlined links */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        a:hover {
+            color: #247b88; /* Softer hover color */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <nav>
+            <a href="{{ url_for('home') }}" class="logo-container">
+                <img src="{{ url_for('static', filename='images/firewall_academy_logo.png') }}" alt="Firewall Academy Logo" class="logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('lessons') }}">Lessons</a></li>
+
+                <!-- Log In / Log Out Button -->
+                {% if logged_in %}
+                    <li><a href="{{ url_for('logout') }}" class="login-btn">Log Out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" class="login-btn">Log In</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Title -->
+        <h1 class="page-title">Parental Advice</h1>
+        <p class="intro-text">Welcome! Here you will find guidance and external resources to help you keep your child safe online.</p>
+
+        <!-- Advice Sections -->
+        <div class="advice-container">
+
+            <!-- Online Safety Tips Section -->
+            <section>
+                <h2 class="advice-heading">Online Safety Tips</h2>
+                <p class="advice-text">
+                    Ensuring your child's online safety starts with education and setting boundaries. Teach them to recognize safe and unsafe websites and establish clear internet usage guidelines. Here are some strategies you can implement:
+                </p>
+                <ul class="numbered-list">
+                    <li class="numbered-item"><strong>Set Clear Boundaries:</strong> Define rules for when and how long your child can be online. Use parental controls to enforce screen time limits.</li>
+                    <li class="numbered-item"><strong>Teach Online Privacy:</strong> Explain why it's essential not to share personal information (e.g., address, school name) without permission.</li>
+                    <li class="numbered-item"><strong>Encourage Open Communication:</strong> Make sure your child feels comfortable discussing their online experiences, including anything that makes them feel uncomfortable.</li>
+                    <li class="numbered-item"><strong>Monitor and Review Content:</strong> Regularly check the websites your child visits and the apps they use to ensure they are age-appropriate.</li>
+                </ul>
+                <p class="advice-text">
+                    For a comprehensive guide to keeping your child safe online, visit <a href="https://www.internetmatters.org/" target="_blank">Internet Matters</a>.
+                </p>
+            </section>
+
+            <!-- Parental Controls Section -->
+            <section>
+                <h2 class="advice-heading">Parental Controls</h2>
+                <p class="advice-text">
+                    Parental controls are powerful tools that allow you to restrict content, monitor activity, and protect your child online. Learn how to customize settings on various devices and platforms:
+                </p>
+                <ul class="numbered-list">
+                    <li class="numbered-item"><strong>Use Built-In Controls:</strong> Enable parental controls on devices and platforms to restrict inappropriate content and manage usage.</li>
+                    <li class="numbered-item"><strong>Set App Permissions:</strong> Ensure apps have only the permissions they need. Be cautious of excessive permission requests.</li>
+                    <li class="numbered-item"><strong>Safe Search Filters:</strong> Activate "Safe Search" on search engines to filter out explicit content.</li>
+                    <li class="numbered-item"><strong>Regular Updates:</strong> Periodically review and update parental controls as your child matures and technology evolves.</li>
+                </ul>
+                <p class="advice-text">
+                    For step-by-step parental control guides, check <a href="https://www.internetmatters.org/parental-controls/" target="_blank">Internet Matters - Parental Controls</a>.
+                </p>
+            </section>
+
+            <!-- Talking to Your Child Section -->
+            <section>
+                <h2 class="advice-heading">Talking to Your Child</h2>
+                <p class="advice-text">
+                    Open and honest conversations about online safety help your child navigate the digital world confidently. Here are some practical tips:
+                </p>
+                <ul class="numbered-list">
+                    <li class="numbered-item"><strong>Start Early:</strong> Begin discussing online safety from the moment your child starts using connected devices.</li>
+                    <li class="numbered-item"><strong>Role-Play Scenarios:</strong> Practice how to respond to strangers online, suspicious messages, or privacy breaches.</li>
+                    <li class="numbered-item"><strong>Be Supportive:</strong> Let your child know they can always come to you if they encounter something uncomfortable online.</li>
+                    <li class="numbered-item"><strong>Regular Check-Ins:</strong> Make online safety discussions a regular part of your parenting routine.</li>
+                </ul>
+                <p class="advice-text">
+                For more advice on guiding your child, visit <a href="https://www.childnet.com/parents-and-carers/have-a-conversation/" target="_blank">Childnet - Conversation Tips</a> or explore the <a href="https://www.nspcc.org.uk/keeping-children-safe/online-safety/" target="_blank">NSPCC Online Safety Hub</a> for comprehensive support.
+                </p>
+
+            </section>
+
+            <!-- Recognizing Online Threats Section -->
+            <section>
+                <h2 class="advice-heading">Recognizing Online Threats</h2>
+                <p class="advice-text">
+                    Online risks like cyberbullying, inappropriate content, and phishing can impact children. Learn to identify and address these threats:
+                </p>
+                <ul class="numbered-list">
+                    <li class="numbered-item"><strong>Signs of Cyberbullying:</strong> Changes in mood, secrecy, or sudden withdrawal from devices may indicate cyberbullying.</li>
+                    <li class="numbered-item"><strong>Detecting Malicious Apps:</strong> Be wary of apps requesting unnecessary permissions or coming from unknown sources.</li>
+                    <li class="numbered-item"><strong>Phishing Scams:</strong> Teach children to avoid clicking suspicious links and report unusual requests for information.</li>
+                    <li class="numbered-item"><strong>Inappropriate Content:</strong> Use filtering tools and monitor their digital consumption to prevent access to harmful materials.</li>
+                </ul>
+                <p class="advice-text">
+                    Find more resources on recognizing threats at <a href="https://www.thinkuknow.co.uk/" target="_blank">ThinkUKnow - Online Threats</a>.
+                </p>
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
