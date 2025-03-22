@@ -422,35 +422,3 @@ button:hover {
     color: #247b88;
 }
 
-/* Navbar styling */
-.navbar {
-    display: flex;             /* Flexbox layout */
-    justify-content: space-around; /* Spread links evenly */
-    align-items: center;       /* Center links vertically */
-    padding: 10px 0;           /* Space around navbar */
-    background-color: #333;    /* Dark background */
-}
-
-/* Navbar links */
-.navbar a {
-    text-decoration: none;     /* Remove underline */
-    color: white;              /* White text */
-    padding: 10px 15px;        /* Space inside links */
-}
-
-/* Hover effect */
-.navbar a:hover {
-    background-color: #555;    /* Darker hover */
-    border-radius: 5px;        /* Rounded hover effect */
-}
-
-/* Make navbar responsive */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column; /* Stack links vertically */
-    }
-    .navbar a {
-        padding: 8px;          /* Smaller padding for tight spaces */
-    }
-}
-
