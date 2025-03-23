@@ -423,18 +423,21 @@ button:hover {
 }
 
 /* Make navbar responsive */
-.navbar {
-    display: flex;              /* Keep it in a row */
-    justify-content: space-around; /* Space links evenly */
-    flex-wrap: wrap;            /* Allow wrapping on small screens */
-    font-size: 1rem;            /* Default size */
+.nav-links {
+    display: flex;                 /* Keep it in a row */
+    gap: 20px;                     /* Maintain space between links */
+    flex-wrap: wrap;               /* Allow wrapping if needed */
+    justify-content: flex-end;     /* Keep links to the right */
 }
 
 /* Shrink the navbar links on small screens */
 @media (max-width: 600px) {
-    .navbar a {
-        font-size: 0.8rem;      /* Smaller font for phones */
-        padding: 5px;           /* Reduce padding */
+    .nav-links {
+        gap: 10px;                 /* Less space between links */
+    }
+
+    .nav-links a {
+        font-size: 0.8rem;         /* Smaller text */
+        padding: 5px;              /* Smaller padding */
     }
 }
-
