@@ -10,24 +10,41 @@ LESSONS = [
     {
         'id': 1,
         'name': 'Online Safety Basics',
-        'introduction': 'Learn how to protect your personal information and stay safe online.',
-        'why_it_matters': 'Understanding online safety is crucial to protect yourself from cyber threats and keep your data secure.',
+        'introduction': 'Welcome! This lesson will teach you how to stay safe when using the internet. You will learn how to protect your personal information and what to do if something feels wrong online.',
+        'why_it_matters': 'Staying safe online is just as important as staying safe in real life. By learning these rules, you can have fun online while keeping yourself safe from people who might want to trick you.',
         'key_concepts': [
-            'Personal information should never be shared without permission.',
-            'Be cautious when interacting with strangers online.',
-            'Always ask an adult if something seems suspicious.'
+            'Keep Your Personal Information Secret - Never share your full name, address, school, or phone number with people online.',
+            'Talk to a Grown-Up - If someone says or does something online that makes you feel confused or scared, tell a grown-up you trust.',
+            'Be Careful with Strangers - Not everyone online is who they say they are. Only talk to people you know in real life.',
+            'Think Before You Click - Always ask a grown-up before clicking on links, downloading things, or sharing pictures.',
+            'Use Safe Websites - Stick to websites, games, and videos that a parent or teacher says are safe for kids.'
         ],
         'interactive_type': 'quiz',
         'interactive_content': [
             {
-                'question': 'What is personal information?',
-                'options': ['Your favourite color', 'Your address', 'A cartoon character'],
-                'answer': 'Your address'
+                'question': 'What should you do if someone online asks where you live?',
+                'options': ['Tell them', 'Keep it a secret', 'Ask them where they live'],
+                'answer': 'Keep it a secret'
             },
             {
-                'question': 'What should you do if someone online asks for your address?',
-                'options': ['Tell them immediately', 'Ignore it', 'Ask an adult for help'],
-                'answer': 'Ask an adult for help'
+                'question': 'Who should you tell if you see something scary online?',
+                'options': ['A friend', 'A trusted adult', 'No one'],
+                'answer': 'A trusted adult'
+            },
+            {
+                'question': 'Is it okay to talk to strangers online?',
+                'options': ['Yes, if they are nice', 'Only if they know your friend', 'No, always ask a grown-up first'],
+                'answer': 'No, always ask a grown-up first'
+            },
+            {
+                'question': 'Why should you ask a grown-up before clicking on a link?',
+                'options': ['To make sure it is safe', 'Because it’s fun', 'So you can share your information'],
+                'answer': 'To make sure it is safe'
+            },
+            {
+                'question': 'What kind of websites are safe to visit?',
+                'options': ['Any website', 'Websites your parent or teacher says are safe', 'Websites with lots of pop-ups'],
+                'answer': 'Websites your parent or teacher says are safe'
             }
         ]
     },
