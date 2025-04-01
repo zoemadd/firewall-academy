@@ -60,39 +60,14 @@ LESSONS = [
             'Update Passwords Regularly: Change your passwords from time to time to keep your accounts safe.',
             'Use Different Passwords: Don’t use the same password for all your accounts. If one gets stolen, others stay safe!'
         ],
-        'interactive_type': 'quiz',
+        'interactive_type': 'fill_in_the_blank',
         'interactive_content': [
-            {
-                'question': 'Which password is the strongest?',
-                'options': ['123456', 'P@ssw0rd!', 'MyName2023'],
-                'answer': 'P@ssw0rd!'
-            },
-            {
-                'question': 'Why is "1234" a bad password?',
-                'options': ['It is too short', 'It is easy to guess', 'It is hard to remember'],
-                'answer': 'It is easy to guess'
-            },
-            {
-                'question': 'Who should you share your password with?',
-                'options': ['Your best friend', 'Your teacher', 'A trusted adult (like a parent or guardian)'],
-                'answer': 'A trusted adult (like a parent or guardian)'
-            },
-            {
-                'question': 'What makes a password strong?',
-                'options': [
-                    'Using a mix of letters, numbers, and symbols',
-                    'Making it your name or birthday',
-                    'Using "password123"'
-                ],
-                'answer': 'Using a mix of letters, numbers, and symbols'
-            },
-            {
-                'question': 'What should you do if you think someone knows your password?',
-                'options': ['Ignore it', 'Change your password immediately', 'Tell everyone your password'],
-                'answer': 'Change your password immediately'
-            }
+            {'text': 'A strong password should contain a mix of ___, numbers, and symbols.', 'answer': 'letters'},
+            {'text': 'You should never share your password with ___ except a trusted adult.', 'answer': 'anyone'},
+            {'text': 'It is a good habit to ___ your password regularly.', 'answer': 'change'}
         ]
     },
+
 
     {
         'id': 3,
@@ -133,9 +108,15 @@ LESSONS = [
             'Turn It Off When Not In Use: When you’re not using the voice assistant, turn it off or mute the microphone to protect your privacy.',
             'Be Careful With Smart Devices: Some voice assistants can control lights, locks, or other devices in your home. Only use these features with permission from a trusted adult.'
         ],
-        'interactive_type': 'simulation',
-        'interactive_content': '<iframe src="https://your-vm-url.com" width="800" height="600"></iframe>'
+        'interactive_type': 'fill_in_the_blank',
+        'interactive_content': [
+            {'text': 'You should always ask a ___ before using a voice assistant.', 'answer': 'grown-up'},
+            {'text': 'Never share your ___ with a voice assistant.', 'answer': 'personal information'},
+            {'text': 'To protect your privacy, you should ___ the voice assistant when not in use.',
+             'answer': 'turn off'}
+        ]
     },
+
 
     {
         'id': 5,

@@ -106,7 +106,27 @@
                 <button id="submit-drag-drop">Submit</button>
                 <p id="drag-drop-result" class="intro-text"></p>
 
-            {% endif %}
+            <!-- Fill in the Blank Section -->
+            {% elif lesson.interactive_type == 'fill_in_the_blank' %}
+                <form method="POST" class="fill-in-the-blank-form">
+                    {% for i, question in enumerate(lesson.interactive_content) %}
+                        <div class="fill-in-the-blank-question">
+                            <p>{{ question.text | safe }}</p>
+                            <input type="text" name="question-{{ i }}" placeholder="Type your answer here">
+                        </div>
+                    {% endfor %}
+                    <div class="quiz-submit-container" style="padding-top: 10px;">
+                        <button type="submit">Submit Quiz</button>
+                    </div>
+
+                </form>
+
+                <!-- Display Results if Quiz is Submitted -->
+                {% if score is defined and request.method == 'POST' %}
+                    <p class="intro-text">You got {{ score }} correct out of {{ total }}!</p>
+                {% endif %}
+
+        {% endif %}
 
         </section>
 
