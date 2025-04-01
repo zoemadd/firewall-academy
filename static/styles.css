@@ -441,3 +441,43 @@ button:hover {
         padding: 5px;              /* Smaller padding */
     }
 }
+
+.drag-item {
+    padding: 15px;
+    margin: 5px;
+    background-color: #247b88; /* Matches buttons */
+    color: #0A1F44; /* Text color */
+    font-weight: bold;
+    border-radius: 10px; /* Rounded corners for consistency */
+    border: none;
+    cursor: grab;
+    display: inline-block;
+    transition: 0.3s ease-in-out;
+}
+
+.drag-item:hover {
+    background-color: #195962; /* Hover effect like other buttons */
+}
+
+.drag-item:active {
+    cursor: grabbing;
+}
+
+.drop-zone {
+    min-height: 50px;
+    min-width: 250px;
+    padding: 15px;
+    margin: 10px;
+    border: 2px dashed #247b88; /* Matches primary button color */
+    background-color: #86a89c; /* Site background color */
+    text-align: center;
+    border-radius: 10px; /* Matches other elements */
+    color: #001f3f;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.drop-zone:hover {
+    background-color: #195962;
+    color: white; /* Makes text stand out on hover */
+}

@@ -106,8 +106,19 @@ LESSONS = [
             'Be Careful With Free Offers: If an app or download promises free money, prizes, or cheats, it could be a trick to steal your data.',
             'Ask a Grown-Up: If you’re unsure about an app or download, ask a parent, teacher, or trusted adult before installing it.'
         ],
-        'interactive_type': 'simulation',
-        'interactive_content': '<iframe src="https://your-vm-url.com" width="800" height="600"></iframe>'
+        'interactive_type': 'drag_and_drop',
+        'interactive_content': {
+            'draggable_items': [
+                {'text': 'Official App Store', 'correct_zone': 'safe'},
+                {'text': 'Suspicious Free Prize App', 'correct_zone': 'unsafe'},
+                {'text': 'App Asking for Too Many Permissions', 'correct_zone': 'unsafe'},
+                {'text': 'App with Good Reviews and Known Developer', 'correct_zone': 'safe'}
+            ],
+            'drop_zones': {
+                'safe': 'Safe Apps & Downloads',
+                'unsafe': 'Unsafe Apps & Downloads'
+            }
+        }
     },
 
     {
@@ -176,8 +187,19 @@ LESSONS = [
             'Be Careful with Strangers: Not everyone online is who they say they are. Never share personal details or meet someone from the internet in real life without permission.',
             'Use Strong Passwords: Protect your accounts with strong passwords and never share them with anyone except a trusted adult.'
         ],
-        'interactive_type': 'simulation',
-        'interactive_content': '<iframe src="https://your-vm-url.com" width="800" height="600"></iframe>'
+        'interactive_type': 'drag_and_drop',
+        'interactive_content': {
+            'draggable_items': [
+                {'text': 'Posting Full Name and Address', 'correct_zone': 'unsafe'},
+                {'text': 'Using a Strong Password', 'correct_zone': 'safe'},
+                {'text': 'Checking Privacy Settings', 'correct_zone': 'safe'},
+                {'text': 'Talking to Strangers Online', 'correct_zone': 'unsafe'}
+            ],
+            'drop_zones': {
+                'safe': 'Safe Online Practices',
+                'unsafe': 'Unsafe Online Practices'
+            }
+        }
     }
 
 ]

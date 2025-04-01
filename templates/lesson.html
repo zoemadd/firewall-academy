@@ -84,15 +84,35 @@
                     <p class="intro-text">You scored {{ score }} out of {{ total }}!</p>
                 {% endif %}
 
-            <!-- Simulation Section -->
-            {% elif lesson.interactive_type == 'simulation' %}
-                <div class="vm-container">
-                    {{ lesson.interactive_content|safe }}
+            <!-- Drag and Drop Section -->
+            {% elif lesson.interactive_type == 'drag_and_drop' %}
+                <div class="drag-drop-container">
+                    <div class="drag-items">
+                        {% for item in lesson.interactive_content.draggable_items %}
+                            <div class="drag-item" id="item-{{ loop.index }}" draggable="true" data-category="{{ item.correct_zone }}">
+                                {{ item.text }}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="drop-zones">
+                        {% for category, label in lesson.interactive_content.drop_zones.items() %}
+                            <div class="drop-zone" data-correct-category="{{ category }}">
+                                <p>{{ label }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
+                <button id="submit-drag-drop">Submit</button>
+                <p id="drag-drop-result" class="intro-text"></p>
+
             {% endif %}
+
         </section>
 
     </main>
+
+<script src="{{ url_for('static', filename='js/drag_and_drop.js') }}"></script>
 
 </body>
 
