@@ -107,24 +107,36 @@
                 <p id="drag-drop-result" class="intro-text"></p>
 
             <!-- Fill in the Blank Section -->
+
             {% elif lesson.interactive_type == 'fill_in_the_blank' %}
+            <div class="fill-in-the-blank-container">
+                <h3 class="word-bank-title">Word Bank (Choose from these words!):</h3>
+                <div class="word-bank">
+                    {% for word in lesson.word_bank %}
+                        <span class="word-bank-item">{{ word }}</span>
+                    {% endfor %}
+
+                </div>
+
                 <form method="POST" class="fill-in-the-blank-form">
                     {% for i, question in enumerate(lesson.interactive_content) %}
                         <div class="fill-in-the-blank-question">
                             <p>{{ question.text | safe }}</p>
-                            <input type="text" name="question-{{ i }}" placeholder="Type your answer here">
+                            <input type="text" name="question-{{ i }}" class="fill-in-input"
+                                placeholder="Type your answer here"
+                                data-answer="{{ question.answer }}">
                         </div>
                     {% endfor %}
-                    <div class="quiz-submit-container" style="padding-top: 10px;">
+                    <div class="quiz-submit-container">
                         <button type="submit">Submit Quiz</button>
                     </div>
-
                 </form>
 
-                <!-- Display Results if Quiz is Submitted -->
+
                 {% if score is defined and request.method == 'POST' %}
-                    <p class="intro-text">You got {{ score }} correct out of {{ total }}!</p>
+                    <p class="intro-text">You scored {{ score }} out of {{ total }}!</p>
                 {% endif %}
+            </div>
 
         {% endif %}
 
@@ -133,6 +145,7 @@
     </main>
 
 <script src="{{ url_for('static', filename='js/drag_and_drop.js') }}"></script>
+<script src="{{ url_for('static', filename='js/fill_in_the_blank.js') }}"></script>
 
 </body>
 

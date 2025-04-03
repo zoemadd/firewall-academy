@@ -65,7 +65,9 @@ LESSONS = [
             {'text': 'A strong password should contain a mix of ___, numbers, and symbols.', 'answer': 'letters'},
             {'text': 'You should never share your password with ___ except a trusted adult.', 'answer': 'anyone'},
             {'text': 'It is a good habit to ___ your password regularly.', 'answer': 'change'}
-        ]
+        ],
+        'word_bank': ['letters', 'anyone', 'change', 'symbols', 'forgot', 'secure', 'password', 'unique']
+
     },
 
 
@@ -112,9 +114,10 @@ LESSONS = [
         'interactive_content': [
             {'text': 'You should always ask a ___ before using a voice assistant.', 'answer': 'grown-up'},
             {'text': 'Never share your ___ with a voice assistant.', 'answer': 'personal information'},
-            {'text': 'To protect your privacy, you should ___ the voice assistant when not in use.',
-             'answer': 'turn off'}
-        ]
+            {'text': 'To protect your privacy, you should ___ the voice assistant when not in use.', 'answer': 'turn off'}
+        ],
+        'word_bank': ['grown-up', 'personal information', 'turn off', 'microphone', 'wake word', 'commands', 'recording', 'settings']
+
     },
 
 

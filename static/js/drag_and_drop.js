@@ -45,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 totalItems++;
                 if (item.dataset.category === correctCategory) {
                     score++;
+                    item.style.border = "3px solid green"; // Green outline for correct
+                } else {
+                    item.style.border = "3px solid red"; // Red outline for incorrect
                 }
             });
         });
@@ -52,3 +55,4 @@ document.addEventListener("DOMContentLoaded", function () {
         resultDisplay.textContent = `You scored ${score} out of ${totalItems}!`;
     });
 });
+
