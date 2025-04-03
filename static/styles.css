@@ -477,10 +477,6 @@ button:hover {
     font-weight: bold;
 }
 
-.drop-zone:hover {
-    background-color: #195962;
-    color: white; /* Makes text stand out on hover */
-}
 
 .fill-in-the-blank-container {
     text-align: center;
