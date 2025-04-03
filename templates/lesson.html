@@ -51,7 +51,9 @@
             <h2 class="advice-heading">Key Concepts:</h2>
             <ol class="numbered-list">
                 {% for concept in lesson.key_concepts %}
-                    <li class="numbered-item">{{ concept }}</li>
+                    <li class="numbered-item">
+                        <strong>{{ concept.split(':')[0] }}:</strong> {{ concept.split(':', 1)[1] }}
+                    </li>
                 {% endfor %}
             </ol>
         </section>

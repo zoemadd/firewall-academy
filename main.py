@@ -124,7 +124,7 @@ LESSONS = [
     {
         'id': 5,
         'name': 'Cyberbullying Awareness',
-        'introduction': 'Learn how to recognize, prevent, and respond to cyberbullying to keep the internet a safe and kind place.',
+        'introduction': 'Learn how to recognise, prevent, and respond to cyberbullying to keep the internet a safe and kind place.',
         'why_it_matters': 'Cyberbullying can hurt feelings and make people feel unsafe. Knowing how to handle it helps everyone have a better experience online.',
         'key_concepts': [
             'Talk to a Trusted Adult: If you or someone you know is being bullied online, tell a parent, teacher, or another trusted adult.',
