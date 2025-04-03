@@ -4,11 +4,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.getElementById("submit-drag-drop");
     const resultDisplay = document.getElementById("drag-drop-result");
 
+    // Load saved score from localStorage
+    const savedScore = localStorage.getItem("dragDropScore");
+    if (savedScore !== null) {
+        resultDisplay.textContent = savedScore;
+    }
+
     draggables.forEach(draggable => {
         draggable.addEventListener("dragstart", function (event) {
             event.dataTransfer.setData("text/plain", event.target.dataset.category);
             event.dataTransfer.setData("id", event.target.id);
-            setTimeout(() => event.target.classList.add("hidden"), 0); // Hides the item temporarily while dragging
+            setTimeout(() => event.target.classList.add("hidden"), 0);
         });
 
         draggable.addEventListener("dragend", function (event) {
@@ -18,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     dropZones.forEach(zone => {
         zone.addEventListener("dragover", function (event) {
-            event.preventDefault(); // Allows drop
+            event.preventDefault();
         });
 
         zone.addEventListener("drop", function (event) {
@@ -45,14 +51,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 totalItems++;
                 if (item.dataset.category === correctCategory) {
                     score++;
-                    item.style.border = "3px solid green"; // Green outline for correct
+                    item.style.border = "3px solid green";
                 } else {
-                    item.style.border = "3px solid red"; // Red outline for incorrect
+                    item.style.border = "3px solid red";
                 }
             });
         });
 
-        resultDisplay.textContent = `You scored ${score} out of ${totalItems}!`;
+        const scoreText = `You scored ${score} out of ${totalItems}!`;
+        resultDisplay.textContent = scoreText;
+        localStorage.setItem("dragDropScore", scoreText); // Save score in localStorage
     });
 });
 

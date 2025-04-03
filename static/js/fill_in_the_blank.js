@@ -5,8 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
     resultDisplay.classList.add("intro-text");
     form.appendChild(resultDisplay);
 
+    // Load saved score from localStorage
+    const savedScore = localStorage.getItem("fillInBlankScore");
+    if (savedScore !== null) {
+        resultDisplay.textContent = savedScore;
+    }
+
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent page reload
+        event.preventDefault();
 
         let score = 0;
         let total = inputs.length;
@@ -17,12 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (userAnswer === correctAnswer) {
                 score++;
-                input.style.borderColor = "green"; // Indicate correct answers
+                input.style.borderColor = "green";
             } else {
-                input.style.borderColor = "red"; // Indicate incorrect answers
+                input.style.borderColor = "red";
             }
         });
 
-        resultDisplay.textContent = `You scored ${score} out of ${total}!`;
+        const scoreText = `You scored ${score} out of ${total}!`;
+        resultDisplay.textContent = scoreText;
+        localStorage.setItem("fillInBlankScore", scoreText); // Save score in localStorage
     });
 });
+
