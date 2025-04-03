@@ -164,7 +164,7 @@ img {
 /* Image centered below the text */
 .home-image {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     display: block;
     margin: 0 auto 20px auto;
 }
