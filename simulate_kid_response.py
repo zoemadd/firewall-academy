@@ -1,12 +1,100 @@
-import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, session
+from transformers import pipeline
+import textstat
+import json
+import re
+import os
+import torch
 
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Required for session management
+# Set seed for consistent results
+torch.manual_seed(42)
 
-DB_PATH = 'users.db'  # Path to SQLite database
+# === Remove old JSON if exists ===
+if os.path.exists("simulated_kid_results.json"):
+    os.remove("simulated_kid_results.json")
 
-LESSONS = [
+# === Load model ===
+generator = pipeline("text2text-generation", model="google/flan-t5-small")
+
+# === UK Age Mapping Function ===
+def uk_reading_age(grade_score):
+    mapping = {
+        0: "Reception or Year 1",
+        1: "Year 2",
+        2: "Year 3",
+        3: "Year 4",
+        4: "Year 5",
+        5: "Year 6",
+    }
+    if grade_score <= 0.9:
+        return "suitable for ages 5–6 (Reception or Year 1)", True
+    elif grade_score <= 1.9:
+        return "suitable for ages 6–7 (Year 2)", True
+    elif grade_score <= 2.9:
+        return "suitable for ages 7–8 (Year 3)", True
+    elif grade_score <= 3.9:
+        return "suitable for ages 8–9 (Year 4)", True
+    elif grade_score <= 4.9:
+        return "suitable for ages 9–10 (Year 5)", True
+    elif grade_score <= 5.9:
+        return "suitable for ages 10–11 (Year 6)", True
+    else:
+        return "above the target age range (11+)", False
+
+# === Clean up generated output ===
+def clean_response(text):
+    text = re.sub(r"(?i)you are 8 years old[\.,]?\s*", "", text)
+    text = re.sub(r"\s{2,}", " ", text)
+    return text.strip().capitalize()
+
+# === Core Functions ===
+def simulate_kid_response(lesson_text):
+    prompt = (
+        f"Pretend you're 8 years old and just learned this at school:\n{lesson_text}\n\n"
+        f"What would you tell your friend about it? Use two short, simple sentences."
+    )
+
+    result = generator(prompt, max_length=150, truncation=True)[0]['generated_text']
+    response = clean_response(result)
+
+    # Light filter: regenerate if too short or echo
+    if len(response.split()) < 5 or "you learned this" in response.lower():
+        result = generator(prompt, max_length=150, truncation=True)[0]['generated_text']
+        response = clean_response(result)
+
+    score = textstat.flesch_kincaid_grade(response)
+    age_range, is_suitable = uk_reading_age(score)
+    return response, score, age_range, is_suitable
+
+
+def simulate_activity_feedback(lesson_text, activity_type):
+    activity_prompt_map = {
+        "quiz": "You answered some quiz questions about it.",
+        "fill_in_the_blank": "You filled in missing words to complete important sentences.",
+        "drag_and_drop": "You sorted things into safe and unsafe categories."
+    }
+
+    activity_description = activity_prompt_map.get(activity_type, "You did an activity about the topic.")
+
+    prompt = (
+        f"Pretend you're 8 years old and you just did this activity:\n{activity_description}\n"
+        f"It was part of a lesson about online safety:\n{lesson_text}\n\n"
+        f"How did you feel about the activity? Was it helpful or fun? Say it in two short sentences like you're telling your friend."
+    )
+
+    result = generator(prompt, max_length=150, truncation=True)[0]['generated_text']
+    response = clean_response(result)
+
+    # Light filter: regenerate if too short or too generic
+    if len(response.split()) < 6 or response.lower() in ["helpful", "fun", "good"]:
+        result = generator(prompt, max_length=150, truncation=True)[0]['generated_text']
+        response = clean_response(result)
+
+    score = textstat.flesch_kincaid_grade(response)
+    age_range, is_suitable = uk_reading_age(score)
+    return response, score, age_range, is_suitable
+
+# === Load Lessons ===
+lessons = [
     {
         'id': 1,
         'name': 'Online Safety Basics',
@@ -188,159 +276,41 @@ LESSONS = [
 
 ]
 
-USERS = {
-    'user@example.com': 'password123'
-}
+# === Run and collect results ===
+results_dict = {}
 
-# Connect to SQLite Database
-def get_db_connection():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row  # Access rows as dictionaries
-    return conn
+for lesson in lessons:
+    lesson_name = lesson["name"]
+    lesson_text = lesson["introduction"] + " " + lesson["why_it_matters"]
+    activity_type = lesson["interactive_type"]
 
-# Check if user is logged in (helper function)
-def is_logged_in():
-    return 'user' in session
+    kid_summary, kid_score, kid_range, kid_ok = simulate_kid_response(lesson_text)
+    activity_feedback, act_score, act_range, act_ok = simulate_activity_feedback(lesson_text, activity_type)
 
-# Register a new user
-def register_user(email, password):
-    conn = get_db_connection()
-    try:
-        conn.execute('INSERT INTO users (email, password) VALUES (?, ?)', (email, password))
-        conn.commit()
-    except sqlite3.IntegrityError:
-        return False  # User already exists
-    finally:
-        conn.close()
-    return True
+    print(f"\n\U0001F4DA Lesson: {lesson_name}")
+    print(f"\U0001F4D8 Summary readability: {kid_range}")
+    print(f"\n\U0001F3AF Activity type: {activity_type}")
+    print(f"\U0001F5E3️  Feedback: {activity_feedback}")
+    print(f"\U0001F4D8 Feedback readability: {act_range}")
 
-# Validate login credentials
-def validate_user(email, password):
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM users WHERE email = ? AND password = ?', (email, password)).fetchone()
-    conn.close()
-    return user
+    if not kid_ok or not act_ok:
+        print("⚠️ Some content may be above the intended age range.")
+    else:
+        print("✅ Both summary and feedback are suitable")
 
-# Sign-Up Page Route
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
+    results_dict[lesson_name] = {
+        "summary_readability_score": kid_score,
+        "summary_age_range": kid_range,
+        "activity_type": activity_type,
+        "activity_feedback": activity_feedback,
+        "activity_readability_score": act_score,
+        "activity_age_range": act_range,
+        "is_summary_suitable": kid_ok,
+        "is_activity_suitable": act_ok
+    }
 
-        if register_user(email, password):
-            return redirect(url_for('login'))  # Successful sign-up, go to login page
-        else:
-            return render_template('signup.html', error="User already exists.", logged_in=False)
+# === Save results ===
+with open("simulated_kid_results.json", "w") as f:
+    json.dump(results_dict, f, indent=2)
 
-    return render_template('signup.html', logged_in=False)
-
-# Dynamic Lesson Route (with login protection)
-@app.route('/lesson/<int:lesson_id>', methods=['GET', 'POST'])
-def lesson(lesson_id):
-    # Ensure user is logged in
-    if not is_logged_in():
-        return redirect(url_for('login', next=request.path))
-
-    # Find the lesson by ID
-    lesson = next((l for l in LESSONS if l['id'] == lesson_id), None)
-    if not lesson:
-        return "Lesson not found", 404
-
-    # Retrieve the user's email from the session
-    user_email = session['user']
-
-    # Fetch saved progress (if any)
-    user_progress = get_user_progress(user_email)
-    saved_score = next((p[1] for p in user_progress if p[0] == f'lesson_{lesson_id}'), None)
-
-    # Handle Quiz Submission and Save Progress
-    if request.method == 'POST' and lesson['interactive_type'] == 'quiz':
-        user_answers = request.form
-
-        # Calculate score
-        score = sum(1 for i, q in enumerate(lesson['interactive_content']) if user_answers.get(f'question-{i}') == q['answer'])
-
-        # Save progress in the database
-        save_progress(user_email, f'lesson_{lesson_id}', score)
-
-        # Update saved_score to display immediately
-        saved_score = score
-
-    # Render the lesson page with saved score (if any)
-    return render_template('lesson.html', lesson=lesson, score=saved_score, total=len(lesson['interactive_content']), enumerate=enumerate, logged_in=True)
-
-# Lessons Page (Requires Login)
-@app.route('/lessons')
-def lessons():
-    if not is_logged_in():
-        return redirect(url_for('login', next=request.path))
-    return render_template('lessons.html', lessons=LESSONS, logged_in=True)
-
-@app.route('/')
-def home():
-    return render_template('index.html', logged_in=is_logged_in())
-
-@app.route('/parental_advice')
-def parental_advice():
-    return render_template('parental_advice.html', logged_in=is_logged_in())
-
-
-# Login Page Route
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-        next_page = request.args.get('next') or url_for('home')
-
-        if validate_user(email, password):
-            session['user'] = email
-            return redirect(next_page)  # Redirect to intended page
-
-        return render_template('login.html', error="Invalid credentials", logged_in=False)
-
-    return render_template('login.html', logged_in=False)
-
-
-# Logout Route
-@app.route('/logout')
-def logout():
-    session.pop('user', None)
-    return redirect(url_for('home'))
-
-# Saving progress of the activities
-def save_progress(user_email, quiz_id, score):
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-
-    cursor.execute('''
-        INSERT INTO progress (user_email, quiz_id, score) 
-        VALUES (?, ?, ?)
-        ON CONFLICT(user_email, quiz_id) 
-        DO UPDATE SET score=excluded.score;
-    ''', (user_email, quiz_id, score))
-
-    conn.commit()
-    conn.close()
-
-def get_user_progress(user_email):
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-
-    cursor.execute('SELECT quiz_id, score FROM progress WHERE user_email = ?', (user_email,))
-    progress = cursor.fetchall()
-
-    conn.close()
-    return progress
-
-@app.route('/dashboard')
-def dashboard():
-    if 'user' not in session:
-        return redirect(url_for('login'))
-
-    user_progress = get_user_progress(session['user_email'])
-    return render_template('dashboard.html', progress=user_progress)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+print("\n✅ All lessons tested and saved to 'simulated_kid_results.json'")

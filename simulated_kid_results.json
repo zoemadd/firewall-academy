@@ -1,0 +1,62 @@
+{
+  "Online Safety Basics": {
+    "summary_readability_score": 0.1,
+    "summary_age_range": "suitable for ages 5\u20136 (Reception or Year 1)",
+    "activity_type": "quiz",
+    "activity_feedback": "Help your friend.",
+    "activity_readability_score": -2.7,
+    "activity_age_range": "suitable for ages 5\u20136 (Reception or Year 1)",
+    "is_summary_suitable": true,
+    "is_activity_suitable": true
+  },
+  "Password Best Practices": {
+    "summary_readability_score": 4.0,
+    "summary_age_range": "suitable for ages 9\u201310 (Year 5)",
+    "activity_type": "fill_in_the_blank",
+    "activity_feedback": "You're not sure if you're old enough to do this activity.",
+    "activity_readability_score": 5.2,
+    "activity_age_range": "suitable for ages 10\u201311 (Year 6)",
+    "is_summary_suitable": true,
+    "is_activity_suitable": true
+  },
+  "Recognising Malicious Apps and Downloads": {
+    "summary_readability_score": -1.9,
+    "summary_age_range": "suitable for ages 5\u20136 (Reception or Year 1)",
+    "activity_type": "drag_and_drop",
+    "activity_feedback": "Learn to spot apps and apps.",
+    "activity_readability_score": -1.5,
+    "activity_age_range": "suitable for ages 5\u20136 (Reception or Year 1)",
+    "is_summary_suitable": true,
+    "is_activity_suitable": true
+  },
+  "Safe Use of Voice Assistants": {
+    "summary_readability_score": 2.1,
+    "summary_age_range": "suitable for ages 7\u20138 (Year 3)",
+    "activity_type": "fill_in_the_blank",
+    "activity_feedback": "Learn how to use voice assistants.",
+    "activity_readability_score": 2.1,
+    "activity_age_range": "suitable for ages 7\u20138 (Year 3)",
+    "is_summary_suitable": true,
+    "is_activity_suitable": true
+  },
+  "Cyberbullying Awareness": {
+    "summary_readability_score": 4.4,
+    "summary_age_range": "suitable for ages 9\u201310 (Year 5)",
+    "activity_type": "quiz",
+    "activity_feedback": "Ask your friend if you're 8 years old.",
+    "activity_readability_score": -0.8,
+    "activity_age_range": "suitable for ages 5\u20136 (Reception or Year 1)",
+    "is_summary_suitable": true,
+    "is_activity_suitable": true
+  },
+  "Online Privacy and Personal Information": {
+    "summary_readability_score": 4.8,
+    "summary_age_range": "suitable for ages 9\u201310 (Year 5)",
+    "activity_type": "drag_and_drop",
+    "activity_feedback": "Learn how to keep your private information safe.",
+    "activity_readability_score": 5.2,
+    "activity_age_range": "suitable for ages 10\u201311 (Year 6)",
+    "is_summary_suitable": true,
+    "is_activity_suitable": true
+  }
+}
